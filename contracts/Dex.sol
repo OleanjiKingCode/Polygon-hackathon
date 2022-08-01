@@ -21,7 +21,7 @@ contract OleanjiGamesToken is ERC20, ReentrancyGuard {
     
 
     function AddLiquidity( uint ogtAmount) public payable returns (uint) {
-        uint OgtBalance = getTotalOfOGTReserve()
+        uint OgtBalance = getTotalOfOGTReserve();
         uint LpGotten;
         uint maticBalance = address(this).balance;
         if(OgtBalance == 0){
@@ -42,11 +42,11 @@ contract OleanjiGamesToken is ERC20, ReentrancyGuard {
     function WithdrawLiquidity (uint amountToWithdawal) public view returns (uint, uint)
     {
         require(amountToWithdawal > 0 , "The amount is too small for a withdrawal");
-        uint maticBalance = getTotalOfOGTReserve()
+        uint maticBalance = getTotalOfOGTReserve();
         uint _totalSupply = totalSupply();
         uint maticEquivalent = (maticBalance * amountToWithdawal)/_totalSupply;
         uint OgtAmount = (totalSupply() * amountToWithdawal ) /_totalSupply;
-        burn(msg.sender , amountToWithdawal);
+        _burn(msg.sender , amountToWithdawal);
         payable(msg.sender).transfer(maticEquivalent);
         ERC20(ogtAddress).transfer(msg.sender,OgtAmount);
         return (maticEquivalent, OgtAmount);
@@ -72,7 +72,7 @@ contract OleanjiGamesToken is ERC20, ReentrancyGuard {
             msg.value,
             address(this).balance - msg.value,
             OgtReserve
-        )
+        );
     require(tokenToCollect >= minTokens, "insufficient");
     ERC20(ogtAddress).transfer(msg.sender, tokenToCollect);
 
@@ -85,7 +85,7 @@ contract OleanjiGamesToken is ERC20, ReentrancyGuard {
             Ogtsent,
             OgtReserve,
             address(this).balance 
-        )
+        );
         require(tokenToCollect >= _mineth, "insufficient");
         ERC20(ogtAddress).transferFrom(msg.sender,address(this), tokenToCollect);
          payable(msg.sender).transfer(tokenToCollect);

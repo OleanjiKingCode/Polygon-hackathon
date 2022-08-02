@@ -64,6 +64,7 @@ contract GameToken is ERC20("OleanjiGameToken" , "OGT"), VRFConsumerBaseV2 {
     mapping (address => bool) private areyouAPlayer;
      mapping (address => bool) private Spinned;
     mapping (uint => Players) private IdOfPlayers;
+    mapping (address => uint) private AddressOfPlayers;
     uint mintToNewPlayers = 130;
 
      VRFCoordinatorV2Interface COORDINATOR;
@@ -124,7 +125,8 @@ contract GameToken is ERC20("OleanjiGameToken" , "OGT"), VRFConsumerBaseV2 {
             false,
             block.timestamp
         );
-
+        AddressOfPlayers[msg.sender] = currentplayerId;
+        
         areyouAPlayer[msg.sender] == true;
 
         emit PlayerJoined (

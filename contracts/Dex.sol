@@ -36,10 +36,12 @@ contract OleanjiGamesToken is ERC20, ReentrancyGuard {
             require(ogtAmount >= expectedOgtAmount , "This is too small for the Matic you are putting");
             OgtToken.transferFrom(msg.sender, address(this), expectedOgtAmount);
             LpGotten = (totalSupply() * msg.value)/ maticCurrentBalance;
+            _mint(msg.sender, LpGotten);
         }
+        return LpGotten;
     } 
      
-    function WithdrawLiquidity (uint amountToWithdawal) public view returns (uint, uint)
+    function WithdrawLiquidity (uint amountToWithdawal) public returns (uint, uint)
     {
         require(amountToWithdawal > 0 , "The amount is too small for a withdrawal");
         uint maticBalance = getTotalOfOGTReserve();

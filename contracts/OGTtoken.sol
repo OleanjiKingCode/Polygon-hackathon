@@ -94,13 +94,16 @@ contract GameToken is ERC20("OleanjiGameToken" , "OGT"), VRFConsumerBaseV2 {
     constructor (
         uint _totalSupply,
         uint64 subscriptionId,
-        uint items_on_board) 
+        uint items_on_board,
+        uint _interval) 
         VRFConsumerBaseV2(vrfCoordinator) 
     {
         no_of_items_on_board = items_on_board;
         uint amount = _totalSupply * 10 ** 18;
         _mint(address(this), amount);
         gameStarted = false;
+        interval = _interval;
+        s_subscriptionId = subscriptionId;
     }
 
     
@@ -182,31 +185,24 @@ contract GameToken is ERC20("OleanjiGameToken" , "OGT"), VRFConsumerBaseV2 {
     function checkUpkeep( 
         bytes memory /* checkData */
         )public
-         view  
+          
         returns (bool upkeepNeeded, bytes memory /* performData */) {
         
-        uint time;
         for (uint i = 0; i < PeopleWhoSpinned.length; i++) {
             address currentAddress = PeopleWhoSpinned[i];
 
             bool isAMember = areyouAPlayer[currentAddress];
             bool heSpinned =  Spinned[currentAddress];
-            uint AllPlayer =  NumOfAllPlayers.current();
-            for (uint i = 0; i < AllPlayer; i++) {
-                
-                time = IdOfPlayers[i+1].lastSpinningTime 
-                
-            }
+            uint _id = AddressOfPlayers[currentAddress];
+            uint time = IdOfPlayers[_id].lastSpinningTime;
             bool lastTime = ((block.timestamp - time ) > interval);
-            bool PlayerSpin = IdOfPlayers[currentAddress].spinning;
+            bool PlayerSpin = IdOfPlayers[_id].spinning;
             upkeepNeeded = (isAMember && heSpinned && PlayerSpin && lastTime );
             if(upkeepNeeded) {
                 areyouAPlayer[currentAddress] = false;
 
             }
         }
-
-       
         return (upkeepNeeded, "0x0");
       
     }
@@ -236,15 +232,21 @@ contract GameToken is ERC20("OleanjiGameToken" , "OGT"), VRFConsumerBaseV2 {
     s_randomLuck = (randomWords[0] % no_of_items_on_board) + 1;
     ResetApplication();
   }
+    function remove(uint index) public{
+        PeopleWhoSpinned[index] = PeopleWhoSpinned[PeopleWhoSpinned.length - 1];
+        PeopleWhoSpinned.pop();
+    }
 
+    
   function ResetApplication () public {
     for (uint i = 0; i < PeopleWhoSpinned.length; i++) {
         address currentAddress = PeopleWhoSpinned[i];
         if(areyouAPlayer[currentAddress] == false && Spinned[currentAddress] == true  ) {
-            IdOfPlayers[currentAddress].lastSpinningTime = block.timestamp;
-            IdOfPlayers[currentAddress].spinning = false;
+            uint _id = AddressOfPlayers[currentAddress];
+            IdOfPlayers[_id].lastSpinningTime = block.timestamp;
+            IdOfPlayers[_id].spinning = false;
             Spinned[currentAddress] = false;
-            PeopleWhoSpinned.pop(currentAddress);
+            remove(i);
         }
     }
   }

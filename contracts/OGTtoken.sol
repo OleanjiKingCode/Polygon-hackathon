@@ -103,7 +103,9 @@ contract GameToken is ERC20("OleanjiGameToken" , "OGT"), VRFConsumerBaseV2 {
         _mint(address(this), amount);
         gameStarted = false;
         interval = _interval;
+        COORDINATOR = VRFCoordinatorV2Interface(vrfCoordinator);
         s_subscriptionId = subscriptionId;
+        s_owner = msg.sender;
     }
 
     

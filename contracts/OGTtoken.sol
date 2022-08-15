@@ -6,10 +6,11 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
 import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
+import "hardhat/console.sol";
 
 error UpkeepNotNeeded();
 
-contract GameToken is ERC20("OleanjiGameToken" , "OGT"), VRFConsumerBaseV2 {
+contract GameToken is ERC20, VRFConsumerBaseV2 {
 
 
     using Counters for Counters.Counter;
@@ -24,8 +25,6 @@ contract GameToken is ERC20("OleanjiGameToken" , "OGT"), VRFConsumerBaseV2 {
     uint gamePlayPrice = 60;
 
     uint no_of_items_on_board = 0;
-    uint public immutable interval;
-
     struct Players {
         string UserName;
         address PlayersAddress;
@@ -36,7 +35,6 @@ contract GameToken is ERC20("OleanjiGameToken" , "OGT"), VRFConsumerBaseV2 {
         uint[] Scores;
         uint HighestScore;
         bool spinning;
-        uint lastSpinningTime;
     }
 
     address[] public PeopleWhoSpinned;
@@ -73,12 +71,12 @@ contract GameToken is ERC20("OleanjiGameToken" , "OGT"), VRFConsumerBaseV2 {
     uint64 s_subscriptionId;
 
 
-    address vrfCoordinator = 0x6168499c0cFfCaCD319c818142124B7A15E857ab;
+    address vrfCoordinator = 0x7a1BaC17Ccc5b313516C5E16fb24f7659aA5ebed;
 
 
-    bytes32 keyHash = 0xd89b2bf150e3b9e13446986e571fb9cab24b13cea0a43ea20a6049a85cc807cc;
+    bytes32 keyHash = 0x4b09e658ed251bcafeebbc69400383d49f344ace09b9576fe248bb02c003fe9f;
 
-    uint32 callbackGasLimit = 300000;
+    uint32 callbackGasLimit = 100000;
 
     
     uint16 requestConfirmations = 3;
@@ -89,23 +87,26 @@ contract GameToken is ERC20("OleanjiGameToken" , "OGT"), VRFConsumerBaseV2 {
     address public winner;
     uint256 public s_requestId;
     address s_owner;
-
-
+    //address of the deployer
+    address ownerAddress;
+    uint public lastTimeStamp;
+    
     constructor (
         uint _totalSupply,
         uint64 subscriptionId,
-        uint items_on_board,
-        uint _interval) 
+        uint items_on_board) 
         VRFConsumerBaseV2(vrfCoordinator) 
+        ERC20("OleanjiGameToken" , "OGT")
     {
+        ownerAddress = msg.sender;
         no_of_items_on_board = items_on_board;
         uint amount = _totalSupply * 10 ** 18;
-        _mint(address(this), amount);
+        _mint(ownerAddress, amount);
         gameStarted = false;
-        interval = _interval;
         COORDINATOR = VRFCoordinatorV2Interface(vrfCoordinator);
         s_subscriptionId = subscriptionId;
         s_owner = msg.sender;
+        lastTimeStamp = block.timestamp;
     }
 
     
@@ -127,12 +128,11 @@ contract GameToken is ERC20("OleanjiGameToken" , "OGT"), VRFConsumerBaseV2 {
             mintToNewPlayers,
             _scores,
             0,
-            false,
-            block.timestamp
+            false
         );
         AddressOfPlayers[msg.sender] = currentplayerId;
         
-        areyouAPlayer[msg.sender] == true;
+        areyouAPlayer[msg.sender] = true;
 
         emit PlayerJoined (
              _name,
@@ -149,6 +149,20 @@ contract GameToken is ERC20("OleanjiGameToken" , "OGT"), VRFConsumerBaseV2 {
 
     }
 
+    function areYouAPlayer() public view returns (bool) {
+        bool isAPlayer =  areyouAPlayer[msg.sender];
+        return isAPlayer;
+    }
+
+    function GetAplayerdetails() public view returns (Players[] memory) {
+        Players[] memory ThisMember = new Players[] (1);
+        uint _theId =  AddressOfPlayers[msg.sender];
+        Players storage _member = IdOfPlayers[_theId];
+        ThisMember[0] = _member;
+        return ThisMember;
+        
+    }
+
     function gameEnded ( uint _id, uint score , uint rewardtokens ) public {
       uint AllPlayer =  NumOfAllPlayers.current();
       uint addedrewards;
@@ -159,7 +173,16 @@ contract GameToken is ERC20("OleanjiGameToken" , "OGT"), VRFConsumerBaseV2 {
             IdOfPlayers[i+1].TokenOwned = addedrewards;
         }
       }
-      transferFrom(address(this), msg.sender ,rewardtokens );
+      uint256 Mintmore = 5000;
+      if(balanceOf(ownerAddress) < Mintmore ){
+            uint newMintingAmount = 10000 * 10 ** 18;
+             _mint(ownerAddress, newMintingAmount);
+        }
+    uint256 rewardtokensAward = rewardtokens * 10 ** 18;
+        // this is where the new members are given tokens and where they are removed from the deployer
+         _mint(msg.sender, rewardtokensAward);
+         _burn(ownerAddress, rewardtokensAward);
+      
       emit GameEnded (
         _id,
         msg.sender,
@@ -168,7 +191,7 @@ contract GameToken is ERC20("OleanjiGameToken" , "OGT"), VRFConsumerBaseV2 {
       );
     }
 
-    function SpinBoard(uint pricePaid) internal  {
+    function SpinBoard(uint pricePaid) public  {
         require(pricePaid >= spinBoardPrice, "The price for the spin board is not enough" );
         require(areyouAPlayer[msg.sender] == true, 'you are not a player');
         Spinned[msg.sender] = true;
@@ -178,45 +201,9 @@ contract GameToken is ERC20("OleanjiGameToken" , "OGT"), VRFConsumerBaseV2 {
                 IdOfPlayers[i+1].spinning = true;
             }
         }
-        
+        console.log("first");
         PeopleWhoSpinned.push(msg.sender);
 
-    }
-
-
-    function checkUpkeep( 
-        bytes memory /* checkData */
-        )public
-          
-        returns (bool upkeepNeeded, bytes memory /* performData */) {
-        
-        for (uint i = 0; i < PeopleWhoSpinned.length; i++) {
-            address currentAddress = PeopleWhoSpinned[i];
-
-            bool isAMember = areyouAPlayer[currentAddress];
-            bool heSpinned =  Spinned[currentAddress];
-            uint _id = AddressOfPlayers[currentAddress];
-            uint time = IdOfPlayers[_id].lastSpinningTime;
-            bool lastTime = ((block.timestamp - time ) > interval);
-            bool PlayerSpin = IdOfPlayers[_id].spinning;
-            upkeepNeeded = (isAMember && heSpinned && PlayerSpin && lastTime );
-            if(upkeepNeeded) {
-                areyouAPlayer[currentAddress] = false;
-
-            }
-        }
-        return (upkeepNeeded, "0x0");
-      
-    }
-
-
-
-    function performUpkeep(bytes calldata /* performData */) external {
-
-       (bool upkeepNeeded, ) = checkUpkeep("");
-        if(!upkeepNeeded) {
-            revert UpkeepNotNeeded();
-        }
         s_requestId = COORDINATOR.requestRandomWords(
         keyHash,
         s_subscriptionId,
@@ -224,16 +211,21 @@ contract GameToken is ERC20("OleanjiGameToken" , "OGT"), VRFConsumerBaseV2 {
         callbackGasLimit,
         numWords
         );
+
     }
 
-    function fulfillRandomWords(
-    uint256, /* requestId */
-    uint256[] memory randomWords)
-     internal override {
 
-    s_randomLuck = (randomWords[0] % no_of_items_on_board) + 1;
-    ResetApplication();
-  }
+    function fulfillRandomWords(
+        uint256, /* requestId */
+        uint256[] memory randomWords)
+        internal override 
+    {
+        console.log("last");
+        s_randomLuck = (randomWords[0] % no_of_items_on_board) + 1;
+        console.log(s_randomLuck);
+        ResetApplication();
+    }
+
     function remove(uint index) public{
         PeopleWhoSpinned[index] = PeopleWhoSpinned[PeopleWhoSpinned.length - 1];
         PeopleWhoSpinned.pop();
@@ -243,11 +235,12 @@ contract GameToken is ERC20("OleanjiGameToken" , "OGT"), VRFConsumerBaseV2 {
   function ResetApplication () public {
     for (uint i = 0; i < PeopleWhoSpinned.length; i++) {
         address currentAddress = PeopleWhoSpinned[i];
-        if(areyouAPlayer[currentAddress] == false && Spinned[currentAddress] == true  ) {
+        if(areyouAPlayer[currentAddress] == true && Spinned[currentAddress] == true  ) {
             uint _id = AddressOfPlayers[currentAddress];
-            IdOfPlayers[_id].lastSpinningTime = block.timestamp;
             IdOfPlayers[_id].spinning = false;
             Spinned[currentAddress] = false;
+            uint newMintingAmount = 10000 * 10 ** 18;
+            _mint(currentAddress, newMintingAmount);
             remove(i);
         }
     }

@@ -3,13 +3,10 @@
 pragma solidity ^0.8.7;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "@openzeppelin/contracts/utils/Counters.sol";
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
-import "hardhat/console.sol";
 
-contract OleanjiGamesToken is ERC20, ReentrancyGuard {
+contract OleanjiGamesToken is ERC20 {
     
-    using Counters for Counters.Counter;
+    
     address public ogtAddress;
     ERC20 OgtToken;
 

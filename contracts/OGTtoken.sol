@@ -48,8 +48,7 @@ contract GameToken is ERC20, VRFConsumerBaseV2 {
         uint rewardTokensOwned,
         uint[] Scores,
         uint highestScore,
-       bool spinning,
-        uint lastSpinningTime
+        bool spinning
     );
     
     event GameEnded(
@@ -143,8 +142,7 @@ contract GameToken is ERC20, VRFConsumerBaseV2 {
             mintToNewPlayers,
            _scores,
             0,
-            false,
-            block.timestamp
+            false
         );
 
     }
@@ -171,14 +169,16 @@ contract GameToken is ERC20, VRFConsumerBaseV2 {
             uint currentTokens = IdOfPlayers[i+1].TokenOwned;
             addedrewards =  currentTokens + rewardtokens;
             IdOfPlayers[i+1].TokenOwned = addedrewards;
+            IdOfPlayers[i+1].MyGames +=1 ;
+            IdOfPlayers[i+1].Scores.push(score);
         }
       }
       uint256 Mintmore = 5000;
       if(balanceOf(ownerAddress) < Mintmore ){
             uint newMintingAmount = 10000 * 10 ** 18;
              _mint(ownerAddress, newMintingAmount);
-        }
-    uint256 rewardtokensAward = rewardtokens * 10 ** 18;
+       }
+       uint256 rewardtokensAward = rewardtokens * 10 ** 18;
         // this is where the new members are given tokens and where they are removed from the deployer
          _mint(msg.sender, rewardtokensAward);
          _burn(ownerAddress, rewardtokensAward);

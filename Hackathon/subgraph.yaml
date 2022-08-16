@@ -1,0 +1,33 @@
+specVersion: 0.0.4
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: GameToken
+    network: mumbai
+    source:
+      address: "0x52Ed4E39187905cFd1Da36D34be357616e518303"
+      abi: GameToken
+      startBlock: 27642965
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - GameEnded
+        - PlayerJoined
+        - Transfer
+      abis:
+        - name: GameToken
+          file: ./abis/GameToken.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: GameEnded(uint256,address,uint256,uint256)
+          handler: handleGameEnded
+        - event: PlayerJoined(string,address,uint256,uint256,string,uint256,uint256[],uint256,bool)
+          handler: handlePlayerJoined
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/game-token.ts

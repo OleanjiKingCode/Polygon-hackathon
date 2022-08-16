@@ -1,0 +1,10 @@
+type Player @entity {
+  id: ID!
+  uaername: String!
+  owner: Bytes! # address
+  No_Of_Games: BigInt! 
+  Date: String!
+  Games: [BigInt!]
+  Highest: BigInt
+  TokensOwned: BigInt
+}

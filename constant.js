@@ -1,0 +1,5 @@
+
+  export const GAMETOKENAddress ="0x52Ed4E39187905cFd1Da36D34be357616e518303"
+  export const DEXAddress = "0xC88fcc78D0b906F6a2a97FCcE0eC0A6AaC305946"
+
+  

@@ -1,0 +1,142 @@
+
+.main{
+  display: flex;
+  padding: 3rem 6rem;
+  flex-direction: row; 
+}
+
+.main_content{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-right: 10rem;
+}
+
+.main_content h1 {
+  font-family: "PixelGame";
+  font-weight: 750;
+  font-size: 60px;
+  line-height: 75px;
+  font-style: normal;
+}
+
+.main_content p{
+  font-size: 17px;
+  line-height: 27px;
+  margin-top: 1px;
+}
+
+
+.main_button{
+  margin-top:2rem;
+}
+
+.main_button button{
+  padding: 1rem;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.first_button {
+  background-color: black;
+  color:#fff8e7;
+  font-weight: bold;
+}
+
+.first_button:active{
+  border-bottom: 1px solid black;
+  background-color: transparent;
+  color: black;
+}
+
+.second_button{
+  background-color: transparent;
+  border: none;
+  font-weight: bold;
+  border-radius: 10px;
+  
+  
+}
+
+.second_button:active{
+  border-bottom: 1px solid black;
+}
+
+.icon{
+  vertical-align:middle;
+  margin: 0 3px;
+  margin-bottom: 5px;
+}
+
+.main img {
+  width: 100%;
+  height:100%;
+}
+
+.mainImage{
+  flex:1;
+  display: flex;
+  justify-content: flex-end;
+  justify-items: flex-end;
+}
+
+@media screen and (max-width:1150px) {
+  .main{
+    flex-direction: column;
+  }
+
+  .main_content{
+    margin: 0 0 3rem;
+  }
+}
+
+@media screen and (max-width:650px) {
+  .main{
+    padding: 4rem 5rem;
+  }
+
+  .main h1{
+    font-size: 49px;
+    line-height: 60px;
+  }
+
+  .main p{
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .main_button{
+    font-size: xx-small;
+  }
+}
+
+@media screen and (max-width:490px) {
+  .main{
+    padding: 4rem 4rem;
+  }
+
+  .main h1{
+    font-size: 36px;
+    line-height: 48px;
+  }
+
+  .main p{
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  .main_button{
+    display: flex;
+  }
+
+  .main_button button{
+    padding: 0.5rem;
+    display: flex;
+    font-size: 14px;
+    border: none;
+  }
+
+
+}

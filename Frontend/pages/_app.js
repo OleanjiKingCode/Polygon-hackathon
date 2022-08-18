@@ -1,15 +1,13 @@
 import '../styles/globals.css'
 import Navbar from '../components/Navbar'
-import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
 import '@rainbow-me/rainbowkit/styles.css';
 import { getDefaultWallets, RainbowKitProvider, midnightTheme, } from '@rainbow-me/rainbowkit';
 import {chain, configureChains, createClient, WagmiConfig, } from 'wagmi';
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 import Footer from '../components/Footer';
-// import { alchemyProvider } from 'wagmi/providers/alchemy';
-// import { publicProvider } from 'wagmi/providers/public';
 
-const PhaserApp = dynamic(() => import("../pages/P2E/Dino"), {ssr:false})
+// const PhaserApp = dynamic(() => import("../pages/P2E/Dino"), {ssr:false})
 
 const mumbaiChain = {
   id: 80001,
@@ -61,7 +59,7 @@ function MyApp({ Component, pageProps }) {
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider theme={midnightTheme()} chains={chains}>
           <Navbar/>
-          <PhaserApp/>
+          {/* <PhaserApp/> */}
           <Component {...pageProps} />
           <Footer/>
         </RainbowKitProvider>

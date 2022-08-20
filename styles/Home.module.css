@@ -1,116 +1,142 @@
-.container {
-  padding: 0 2rem;
+
+.main{
+  display: flex;
+  padding: 3rem 6rem;
+  flex-direction: row; 
 }
 
-.main {
-  min-height: 100vh;
-  padding: 4rem 0;
+.main_content{
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  margin-right: 10rem;
 }
 
-.footer {
-  display: flex;
-  flex: 1;
-  padding: 2rem 0;
-  border-top: 1px solid #eaeaea;
-  justify-content: center;
-  align-items: center;
+.main_content h1 {
+  font-family: "PixelGame";
+  font-weight: 750;
+  font-size: 60px;
+  line-height: 75px;
+  font-style: normal;
 }
 
-.footer a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
+.main_content p{
+  font-size: 17px;
+  line-height: 27px;
+  margin-top: 1px;
 }
 
-.title a {
-  color: #0070f3;
-  text-decoration: none;
+
+.main_button{
+  margin-top:2rem;
 }
 
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
+.main_button button{
+  padding: 1rem;
+  cursor: pointer;
+  font-size: 20px;
 }
 
-.title {
-  margin: 0;
-  line-height: 1.15;
-  font-size: 4rem;
+.first_button {
+  background-color: black;
+  color:#fff8e7;
+  font-weight: bold;
 }
 
-.title,
-.description {
-  text-align: center;
+.first_button:active{
+  border-bottom: 1px solid black;
+  background-color: transparent;
+  color: black;
 }
 
-.description {
-  margin: 4rem 0;
-  line-height: 1.5;
-  font-size: 1.5rem;
-}
-
-.code {
-  background: #fafafa;
-  border-radius: 5px;
-  padding: 0.75rem;
-  font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
-}
-
-.grid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  max-width: 800px;
-}
-
-.card {
-  margin: 1rem;
-  padding: 1.5rem;
-  text-align: left;
-  color: inherit;
-  text-decoration: none;
-  border: 1px solid #eaeaea;
+.second_button{
+  background-color: transparent;
+  border: none;
+  font-weight: bold;
   border-radius: 10px;
-  transition: color 0.15s ease, border-color 0.15s ease;
-  max-width: 300px;
+  
+  
 }
 
-.card:hover,
-.card:focus,
-.card:active {
-  color: #0070f3;
-  border-color: #0070f3;
+.second_button:active{
+  border-bottom: 1px solid black;
 }
 
-.card h2 {
-  margin: 0 0 1rem 0;
-  font-size: 1.5rem;
+.icon{
+  vertical-align:middle;
+  margin: 0 3px;
+  margin-bottom: 5px;
 }
 
-.card p {
-  margin: 0;
-  font-size: 1.25rem;
-  line-height: 1.5;
+.main img {
+  width: 100%;
+  height:100%;
 }
 
-.logo {
-  height: 1em;
-  margin-left: 0.5rem;
+.mainImage{
+  flex:1;
+  display: flex;
+  justify-content: flex-end;
+  justify-items: flex-end;
 }
 
-@media (max-width: 600px) {
-  .grid {
-    width: 100%;
+@media screen and (max-width:1150px) {
+  .main{
     flex-direction: column;
   }
+
+  .main_content{
+    margin: 0 0 3rem;
+  }
+}
+
+@media screen and (max-width:650px) {
+  .main{
+    padding: 4rem 5rem;
+  }
+
+  .main h1{
+    font-size: 49px;
+    line-height: 60px;
+  }
+
+  .main p{
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .main_button{
+    font-size: xx-small;
+  }
+}
+
+@media screen and (max-width:490px) {
+  .main{
+    padding: 4rem 4rem;
+  }
+
+  .main h1{
+    font-size: 36px;
+    line-height: 48px;
+  }
+
+  .main p{
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  .main_button{
+    display: flex;
+  }
+
+  .main_button button{
+    padding: 0.5rem;
+    display: flex;
+    font-size: 14px;
+    border: none;
+  }
+
+
 }

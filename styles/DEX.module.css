@@ -1,0 +1,266 @@
+.dexOptions{
+    border: 3px solid black;
+    margin-bottom: 3rem;
+    border-radius: 10px;
+    padding:2px;
+}
+
+.dexOption{
+    display: flex;
+}
+
+
+
+.dexOption button{
+    margin: 10px;
+    font-family: "pixelgame";
+    padding-top: 3px;
+    font-size: 1.1rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.dex{
+    padding: 3rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    font-family: "PixelGame";
+}
+
+
+.dex_content{
+    padding: 3rem;
+    border-radius: 20px;
+    background-color: black;
+    color: #fff8e7;
+}
+
+
+.formHeader{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.settings{
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.mainSwap{
+    flex:1;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.tokenSelector{
+    margin-bottom: 5px;
+}
+
+.tokenSelectorContent{
+    display: flex;
+    flex-direction: row;
+    margin: 1rem 0;
+}
+
+
+
+.firstInput input{
+    background-color: #fff8e7;
+    font-size: 1.9rem;
+    padding: 1rem;
+    color: black;
+    font-family: "PixelGame";
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+.swapIcon{
+    cursor: pointer;
+}
+
+.secondInput input{
+    background-color: #fff8e7;
+    font-size: 1.9rem;
+    padding: 1rem;
+    color: black;
+    border: none;
+    font-family: "PixelGame";
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.swapBtn button{
+    margin: 1rem;
+    padding: 1.5rem;
+    font-family: "PixelGame";
+    background-color: transparent;
+    color: #fff8e7;
+    min-width: 10rem;
+    border-radius: 10px;
+    border-bottom: 1px solid #fff8e7;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.swapBtn button:active{
+    box-shadow: 3px 3px #fff8e7;
+}
+
+
+
+
+
+@media screen and (max-width:550px) {
+    .firstInput input{
+        font-size: 1rem;
+    }
+
+    .secondInput input{
+        font-size: 1rem;
+    }
+
+    .swapBtn button{
+        font-size: 0.9rem;
+        padding: 1rem 3rem;
+        border-bottom:1px solid #fff8e7;
+    }
+}
+
+.footer{
+    background-color: black;
+    padding: 3rem 4rem;
+    color: #fff8e7;
+}
+
+/* LIQUIDITY */
+
+.liquidityPage{
+    display: flex;
+    flex-direction: row;
+    /* align-items: center; */
+}
+
+.liquidity{
+    padding: 2rem 4rem;
+    border-radius: 20px;
+    background-color: black;
+    color: #fff8e7;
+}
+
+.dexTitle{
+    /* text-align: center; */
+    border-bottom: 1px solid #fff8e7;
+    padding:15px;
+}
+
+.liquidMain{
+    display:flex;
+    flex-direction: column;
+}
+
+.liquidMain input{
+    background-color: #fff8e7;
+    font-size: 1.5rem;
+    padding: 1rem;
+    text-align: center;
+    color: black;
+    font-family: "PixelGame";
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+.liquidBtn{
+    margin: 1rem;
+    padding: 1rem;
+    font-family: "PixelGame";
+    background-color: transparent;
+    color: #fff8e7;
+    min-width: 10rem;
+    border-radius: 10px;
+    border-bottom: 1px solid #fff8e7;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.remove{
+    padding: 2rem 4rem;
+    border-radius: 20px;
+    background-color: black;
+    color: #fff8e7;
+    margin-left: 10rem;
+}
+
+.removeMain{
+    display: flex;
+    flex-direction: column;
+}
+
+.removeMain input{
+    background-color: #fff8e7;
+    font-size: 1.5rem;
+    padding: 1rem;
+    text-align: center;
+    color: black;
+    font-family: "PixelGame";
+    border: none;
+    border-radius: 10px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+.removeBtn{
+    margin: 1rem;
+    padding: 1rem;
+    font-family: "PixelGame";
+    background-color: transparent;
+    color: #fff8e7;
+    min-width: 10rem;
+    border-radius: 10px;
+    border-bottom: 1px solid #fff8e7;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+@media screen and (max-width:1200px) {
+    .liquidityPage{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        justify-items: center;
+    }
+
+    .remove{
+        margin-left: 0;
+        margin-top: 4rem;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .liquidMain input{
+        font-size: 1rem;
+        padding: 0.7rem;
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .removeMain input{
+            font-size: 1rem;
+            padding: 0.7rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            text-align: left;
+    }
+}

@@ -22,6 +22,50 @@ function Spin() {
    
     const[rand,setRand]= useState(0)
 
+/////////////For When Player joins////////////////////////
+
+    // const NewPlayer= async (_name) => {
+    //     try {
+    //         const tokenContract = new Contract(
+    //             GAMETOKENAddress,
+    //             GAMETOKEN_abi,
+    //             signer
+    //         );
+    //         let today = new Date().toISOString().slice(0, 10);
+    //         const PlayerAdded = await tokenContract.NewPlayer(today, _name);
+    //         await PlayerAdded.wait()
+    //         window.alert(`You are now a player and you have received ogt Tokens with this Contract Address ${ GAMETOKENAddress}`)
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+      
+        
+    // }
+
+/////////////For When Player loses////////////////////////
+
+    // const EndGame= async (_id,score) => {
+    //     try {
+    //         //////////////////_id is the id of the playr that just lost the game////
+    //         ////////////////score its the last recorded score in the game///////////////
+    //         const tokenContract = new Contract(
+    //             GAMETOKENAddress,
+    //             GAMETOKEN_abi,
+    //             signer
+    //         );
+            
+    //         const GameEnded = await tokenContract.gameEnded(_id, score,score);
+    //         await GameEnded.wait()
+        
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+      
+        
+    // }
+
+
+    
     const spin = async () =>{
         try {
             setStart(styles.spin);
@@ -40,8 +84,7 @@ function Spin() {
       
         console.log(amount)
        
-        let today = new Date().toISOString().slice(0, 10);
-        console.log(today);
+    
         const utils = transact.toString();
         const amount =  ethers.utils.parseEther(utils)
         const start = await tokenContract.SpinBoard(200);
@@ -51,7 +94,6 @@ function Spin() {
             console.log(rand)
             const randomConsequence = (rand * rand) - (2 * rand) - 10;
             if (randomConsequence < 0) {
-                console.log("dsjvjvjvjfjfjfjfjfjfjbhsdvbsd")
                 const trans = randomConsequence * -1;
                 const utils = trans.toString();
                 const amount =  ethers.utils.parseEther(utils)
@@ -60,11 +102,12 @@ function Spin() {
                 await happy.wait()
                 const pay = await SpinContract.lotterySuccess(amount.toString())
                 await pay.wait()
+
                 setStart(styles.circle)
                 swal("Sorry", `You lost  ${randomConsequence} tokens` , "error")
+
             }
             else {
-                console.log("dsjbhsdvbsd")
                 const utils = randomConsequence.toString();
                 const amount =  ethers.utils.parseEther(utils)
                 console.log(amount.toString())
@@ -72,19 +115,12 @@ function Spin() {
                 await happy.wait()
                 const pay = await SpinContract.lotteryBadluck(amount.toString())
                 await pay.wait()
+
                 setStart(styles.circle)
                 swal("Congratulations", `You won ${randomConsequence} tokens` , "success")
             }
             setRand(0)
         }
-        // setTimeout(()=>{
-           
-        // },4500);
-        // rand > 0 ? 
-        // // setTimeout(() => {
-        //     swal("TESTING", `Yeah ${rand}` , "success")
-        // // }, 4500) 
-        // : console.log("false")
         } catch (error) {
             console.log(error)
         }

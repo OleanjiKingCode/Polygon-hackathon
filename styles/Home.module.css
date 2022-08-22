@@ -82,12 +82,65 @@
   justify-items: flex-end;
 }
 
+.secondMain{
+  display: flex;
+  padding: 3rem 4rem;
+  flex-direction: row;
+  border-top: 1px solid black; 
+}
+
+.secondContent{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-right: 10rem;
+}
+
+.secondContent h3{
+  font-family: "PixelGame";
+  font-weight: 750;
+  font-size: 30px;
+  /* line-height: 75px; */
+  font-style: normal;
+  border-bottom:1px solid black;
+}
+
+.secondContent p{
+  font-family: "PixelGame";
+  /* font-weight: 750; */
+  font-size: 15px;
+  /* line-height: 75px; */
+  font-style: normal;
+}
+
+.secondImg img{
+  width: 100%;
+  height:100%;
+}
+
+.secondImg{
+    flex:1;
+    display: flex;
+    justify-content: flex-start;
+    justify-items: flex-start;
+}
+
 @media screen and (max-width:1150px) {
   .main{
     flex-direction: column;
   }
 
+  .secondMain{
+    flex-direction: column;
+  }
+
   .main_content{
+    margin: 0 0 3rem;
+  }
+
+  .secondContent{
     margin: 0 0 3rem;
   }
 }
@@ -97,12 +150,26 @@
     padding: 4rem 5rem;
   }
 
+  .secondMain{
+    padding: 4rem 5rem;
+  }
+
   .main h1{
     font-size: 49px;
     line-height: 60px;
   }
 
+  .secondMain h3{
+    font-size: 19px;
+    line-height: 60px;
+  }
+
   .main p{
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .secondMain p{
     font-size: 16px;
     line-height: 24px;
   }
@@ -117,7 +184,16 @@
     padding: 4rem 4rem;
   }
 
+  .secondMain{
+    padding: 4rem 4rem;
+  }
+
   .main h1{
+    font-size: 36px;
+    line-height: 48px;
+  }
+
+  .secondMain h3{
     font-size: 36px;
     line-height: 48px;
   }
@@ -127,6 +203,11 @@
     line-height: 24px;
   }
 
+  .secondMain p{
+    font-size: 14px;
+    line-height: 24px;
+  }
+  
   .main_button{
     display: flex;
   }

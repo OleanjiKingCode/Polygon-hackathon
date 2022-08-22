@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react'
+import Footer from '../components/Footer';
 import Image from 'next/image'
 import ethLogo from '../public/eth.png'
 import styles from "../styles/DEX.module.css"
@@ -382,6 +383,7 @@ function DEX() {
         </div>
         {renderPage()}
     </div>
+    <Footer/>
     </>
 
   )

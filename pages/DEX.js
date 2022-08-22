@@ -288,7 +288,7 @@ function DEX() {
             {ethSelected
               ? `YOU WILL RECEIVE ${utils.formatEther(
                   tokenToBeRecievedAfterSwap
-                )} GAME TOKENS Tokens`
+                )} Ξ GAME TOKENS`
               : `YOU WILL RECEIVE ${utils.formatEther(
                   tokenToBeRecievedAfterSwap
                 )} MATIC`}

@@ -1,0 +1,21 @@
+.gameScreen{
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gameScore{
+    position: absolute;
+    z-index: 10;
+    color: white;
+    top:10px;
+    left: 10px;
+    margin:0;
+    font-family: "pixelgame";
+    font-size: 20px;
+}
+
+.mainGame{
+    position: relative;
+}

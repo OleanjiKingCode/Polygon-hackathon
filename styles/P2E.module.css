@@ -2,6 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    /* flex-direction: column; */
     padding: 3rem 4rem;
 }
 
@@ -10,4 +11,112 @@
     color: black;
     background-color: transparent;
     border-radius: 10px;
+}
+
+.shooterCard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    /* background-color: black; */
+    border-radius: 10px;
+    margin: 2rem;
+    padding: 5px;
+    /* background-color: black; */
+    /* margin: 1.5rem; */
+}
+
+
+.shooterBtn{
+    text-align: center;
+}
+
+.shooterBtn p{
+    font-family: "pixelgame";
+    /* color:#fff8e7; */
+}
+.shooterBtn button{
+    /* padding: 10px;
+    margin: 5px;
+    font-family: 'pixelgame';
+    cursor: pointer; */
+    margin: 1rem;
+    padding: 1.5rem;
+    font-family: "PixelGame";
+    background-color: transparent;
+    /* color: #fff8e7; */
+    min-width: 10rem;
+    border-radius: 10px;
+    border: none;
+    border-bottom: 2px solid black;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.shooterImg{
+    width: 50%;
+    height:50%;
+    margin:1rem;
+}
+
+.breakerImg{
+    width: 30%;
+    height:30%;
+    margin: 1rem;
+}
+
+.breakerCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+    /* background-color: black; */
+    border-radius: 10px;
+    /* color:#fff8e7; */
+    padding: 5px;
+}
+
+.breakerBtn{
+    text-align: center;
+}
+
+.breakerBtn p{
+    font-family: "pixelgame";
+}
+
+.breakerBtn button{
+    /* padding: 10px;
+    margin: 5px;
+    font-family: 'pixelgame';
+    cursor: pointer; */
+    margin: 1rem;
+    padding: 1.5rem;
+    font-family: "PixelGame";
+    background-color: transparent;
+    /* color: #fff8e7; */
+    min-width: 10rem;
+    border-radius: 10px;
+    border: none;
+    border-bottom: 2px solid black;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.more{
+    padding: 3rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and (max-width:800px) {
+    .gameHome{
+        flex-direction: column;
+    }
+
+    .breakerCard{
+        margin-top:2rem;
+    }
 }

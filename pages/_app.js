@@ -9,7 +9,7 @@ import {
 } from '@rainbow-me/rainbowkit';
 import {chain, defaultChains, configureChains, createClient, WagmiConfig, } from 'wagmi';
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
-import Footer from '../components/Footer';
+// import Footer from '../components/Footer';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
 
@@ -42,7 +42,7 @@ function MyApp({ Component, pageProps }) {
         <RainbowKitProvider theme={midnightTheme()} chains={chains}>
           <Navbar/>
           <Component {...pageProps} />
-          <Footer/>
+          {/* <Footer/> */}
         </RainbowKitProvider>
       </WagmiConfig>
   </>

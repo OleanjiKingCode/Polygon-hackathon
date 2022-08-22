@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react'
+import Footer from '../components/Footer';
 import styles from '../styles/Spin.module.css'
 import { motion } from 'framer-motion';
 import swal from 'sweetalert';
@@ -214,6 +215,7 @@ function Spin() {
         <motion.button whileTap={{scale:0.5}} whileHover={{scale:1.1}} className={styles.spinBtn} onClick={test}>GET LUCKY</motion.button>
     </div>
     </div>
+    <Footer/>
     </>
   )
 }

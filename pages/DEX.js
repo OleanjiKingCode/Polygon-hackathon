@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react'
+import Footer from '../components/Footer';
 import Image from 'next/image'
 import ethLogo from '../public/eth.png'
 import styles from "../styles/DEX.module.css"
@@ -247,7 +248,7 @@ function DEX() {
             </div>
 
             <div className={styles.firstInput}>
-                <motion.select
+                <motion.select className={styles.option}
                     name="dropdown"
                     id="dropdown"
                     onChange={async () => {
@@ -262,7 +263,7 @@ function DEX() {
                                     <div className={styles.tokenSelectorImage}>
                                     
                                     </div>
-                                    <div> Matic </div>
+                                    <div> MATIC </div>
                                 </div>
                         </div>
                     </option>
@@ -270,7 +271,7 @@ function DEX() {
                         <div className={styles.tokenSelector}>
                                 <div className={styles.tokenSelectorContent}>
                                     <div className={styles.tokenSelectorImage}>
-                                        <div>Ξ Game TOKEN</div>
+                                        <div>Ξ GAME TOKEN</div>
                                     </div>
                                 </div>
                         </div>
@@ -285,12 +286,12 @@ function DEX() {
             <div className={styles.mainSwap}>
             <div className={styles.inputDiv}>
             {ethSelected
-              ? `You will get ${utils.formatEther(
+              ? `YOU WILL RECEIVE ${utils.formatEther(
                   tokenToBeRecievedAfterSwap
                 )} GAME TOKENS Tokens`
-              : `You will get ${utils.formatEther(
+              : `YOU WILL RECEIVE ${utils.formatEther(
                   tokenToBeRecievedAfterSwap
-                )} Matic`}
+                )} MATIC`}
           </div>
                 <div className={styles.swapBtn}>
                     <motion.button whileTap={{scale:0.5}} whileHover={{scale:1.1, boxShadow:'0px 1px 5px #fff8e7',}} onClick={_swapTokens}>SWAP</motion.button>
@@ -382,6 +383,7 @@ function DEX() {
         </div>
         {renderPage()}
     </div>
+    <Footer/>
     </>
 
   )

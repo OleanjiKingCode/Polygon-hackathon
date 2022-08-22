@@ -4,13 +4,14 @@ import {motion} from "framer-motion"
 import styles from '../styles/Home.module.css'
 import {AiFillThunderbolt}from 'react-icons/ai'
 import { BsController } from 'react-icons/bs'
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+import Footer from '../components/Footer';
 
 
 
 export default function Home() {
 
   return (
+    <>
     <div className={styles.container}>
       <Head>
         <title>Hackathon DEX Project</title>
@@ -48,7 +49,22 @@ export default function Home() {
             </div>
           </div>
           </motion.div>
-          {/* <ConnectButton /> */}
+          <div>
+          <div className={styles.secondMain}>
+              <div className={styles.secondImg}>
+                <img src="/arcade.png"></img>
+              </div>
+            <div className={styles.secondContent}>
+              <div>
+                <h3> A DECENTRALIZED ARCADE-TYPE WEBSITE FOR NOSTALGIC AND RETRO GAME AVAILABLE. </h3>
+                <p> THESE GAMES CAN BE ACCESSED THROUGH THE USE OF A DECENTRALIZED TOKEN PAYMENT SYSTEM SIMILAR TO COINS USED IN A ARCADE. </p>
+                <p>POLYGON TEST TOKENS CAN BE EXCHANGED FOR THESE TOKENS WHICH CAN BE USED TO ACCESS A VARIETY OF GAMES WHICH WILL BE ADDED OVERTIME</p>
+              </div>
+            </div>
+          </div>
+          </div>
     </div>
+    <Footer/>
+    </>
   )
 }

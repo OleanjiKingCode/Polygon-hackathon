@@ -9,6 +9,12 @@
     display: flex;
 }
 
+.option{
+    color:#fff8e7;
+    padding: 0.8rem;
+    border-radius: 10px;
+    background-color: black;
+}
 
 
 .dexOption button{

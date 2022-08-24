@@ -119,4 +119,30 @@
     .breakerCard{
         margin-top:2rem;
     }
+
+    .shooterImg{
+        width: 80%;
+        height:80%;
+    }
+
+    .shooterBtn p{
+        font-size: 10px;
+    }
+
+    .shooterBtn button{
+        font-size: 10px;
+    }
+
+    .breakerImg{
+        width: 60%;
+        height:60%;
+    }
+
+    .breakerBtn p{
+        font-size: 10px;
+    }
+
+    .breakerBtn button{
+        font-size: 10px;
+    }
 }

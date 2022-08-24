@@ -3,6 +3,7 @@ import Link from 'next/link'
 import styles from '../../styles/P2E.module.css'
 import Footer from '../../components/Footer';
 import {motion} from "framer-motion"
+import {BsFillExclamationOctagonFill} from 'react-icons/bs'
 
 function P2E() {
   return (
@@ -21,7 +22,8 @@ function P2E() {
         <div className={styles.breakerBtn}>
           <p>CLICK THE BUTTON BELOW TO PLAY [UNFORTUNATELY GAME IS ONLY AVAILABLE ON DESKTOP]</p>
           <p>MOVE THE MOUSE FOR DIRECTION</p>
-          <Link href="/P2E/Paddle" ><motion.button whileTap={{scale:0.5}} whileHover={{scale:1.1, boxShadow:'0px 1px 5px #fff8e7',}}>PLAY PADDLE GAME</motion.button></Link>
+          <motion.button>UNDER CONSTRUCTION <BsFillExclamationOctagonFill/></motion.button>
+          {/* <Link href="/P2E/Paddle" ><motion.button whileTap={{scale:0.5}} whileHover={{scale:1.1, boxShadow:'0px 1px 5px #fff8e7',}}>PLAY PADDLE GAME</motion.button></Link> */}
         </div>
         </div>
       </motion.div>
